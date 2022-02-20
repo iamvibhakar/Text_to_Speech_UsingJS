@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="style.css">
+  <title>Text to Voice</title>
+</head>
+<body>
+    <div class="con">
+      <header>Convert Text to Voice</header>
+      <form class="" action="#" method="post">
+        <div class="box">
+          <label>Type Text</label>
+          <textarea></textarea>
+        </div>
+
+        <div class="box">
+          <label>Select Voice Language</label>
+          <div class="voices">
+            <select class="" name="">
+
+            </select>
+          </div>
+        </div>
+        <button type="button" name="button">Convert to Voice</button>
+      </form>
+    </div>
+</body>
+<script type="text/javascript">
+  const textarea = document.querySelector("textarea"),
+  voiceList = document.querySelector("select"),
+  speechBtn = document.querySelector("button");
+
+  let synth = speechSynthesis,
+  isSpeaking = true;
+
+  voices();
+
+  function voices(){
+    for(let voice of synth.getVoices()){
+      let selected = voice.name === "Google US English" ? "selected" : "";
+      let option = `<option value="${voice.name}" ${selected}>${voice.name} (${voice.lang})</option>`;
+      voiceList.insertAdjacentHTML("beforeend",option);
+    }
+  }
+  synth.addEventListener("voiceschanged",voices);
+  function textToSpeech(text){
+    let utterance = new SpeechSynthesisUtterance(text);
+    for(let voice of synth.getVoices()){
+      if (voice.name === voiceList.value) {
+        utterance.voice = voice ;
+      }
+    }
+    synth.speak(utterance);
+  }
+  speechBtn.addEventListener("click", e => {
+    e.preventDefault();
+    if (textarea.value !== "") {
+      if (!synth.speaking) {
+        textToSpeech(textarea.value);
+      }
+      else {
+        speechBtn.innerText = "Convert to Voice";
+      }
+    }
+  })
+</script>
+</html>

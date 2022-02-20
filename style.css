@@ -1,0 +1,72 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html{
+  user-select: none;
+}
+body{
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  background: black;
+}
+.con{
+  width: 340px;
+  height: 460px;
+  background: #eee;
+  padding: 40px 30px;
+  font-family: sans-serif;
+  border-radius: 12px;
+}
+.con header{
+  text-align: center;
+  font-size: 28px;
+  font-weight: 500;
+}
+.con form{
+  margin: 30px 0 20px;
+}
+form .box{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 35px;
+}
+.box textarea{
+  height: 110px;
+  resize: none;
+  padding: 8px 10px;
+  font-size: 16px;
+}
+.box textarea::-webkit-scrollbar{
+  width: 0;
+}
+
+.con :where(textarea,select,button){
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid #999;
+  height: 100%;
+  width: 100%;
+}
+.box .voices{
+  height: 50px;
+  font-size: 16px;
+}
+.con button{
+  height: 48px;
+  background: black;
+  font-size: 18px;
+  color: #eee;
+  transition-duration: 0.3s;
+  cursor: pointer;
+}
+.con button:hover{
+  background: green;
+  color: black;
+  font-weight: bold;
+}
+.con button:active{
+  transform:scale(0.9);
+}
